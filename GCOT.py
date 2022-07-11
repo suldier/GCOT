@@ -1,19 +1,11 @@
-import heapq
 import numpy as np
 from munkres import Munkres
 from scipy.sparse.linalg import svds
 from sklearn.cluster import SpectralClustering
 from sklearn.metrics import normalized_mutual_info_score, cohen_kappa_score, accuracy_score
 
-from sklearn.neighbors import kneighbors_graph
 from sklearn.preprocessing import normalize,minmax_scale
 import ot
-import matplotlib.pyplot as plt
-from gen_a import adjacent_a
-import time
-import copy
-import time
-import signal
 
 class GCOT:
     def __init__(self, n_clusters):
