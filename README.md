@@ -1,7 +1,7 @@
 # GCOT: Graph Convolutional Optimal Transport for Hyperspectral Image Spectral Clustering
 **This repository is the official open source for GCOT reported by "S. Liu and H. Wang, "Graph Convolutional Optimal Transport for Hyperspectral Image Spectral Clustering," in IEEE Transactions on Geoscience and Remote Sensing, vol. 60, pp. 1-13, 2022, Art no. 4414013, doi: 10.1109/TGRS.2022.3203481."** ([link](https://ieeexplore.ieee.org/document/9874842/))
 ## Overview of GCOT
-![Overview of GCOT](blob/main/docs/Overview.png)
+![Overview of GCOT](./docs/Overview.png)
 
 ## Usage
 Install requirements
