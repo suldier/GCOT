@@ -36,8 +36,8 @@ if __name__ == '__main__':
     root = 'HSI_Datasets/'
 
     #im_, gt_ = 'Indian_pines_corrected', 'Indian_pines_gt'
-    im_, gt_ = 'SalinasA_corrected', 'SalinasA_gt'
-    #im_, gt_ = 'PaviaU', 'PaviaU_gt'
+    #im_, gt_ = 'SalinasA_corrected', 'SalinasA_gt'
+    im_, gt_ = 'PaviaU', 'PaviaU_gt'
 
     img_path = root + im_ + '.mat'
     gt_path = root + gt_ + '.mat'
@@ -83,12 +83,12 @@ if __name__ == '__main__':
     # performing  GCOT
     # ========================
     gcot = GCOT(n_clusters=N_CLASSES)
+    C = gcot.fit_base(x_patches_2d, eps1)
+    C = gcot.fit_gcot(x_patches_2d, eps2, C, k)
 
     # ========================
     # Results and Visualization
     # ========================
-    C = gcot.fit_base(x_patches_2d, eps1)
-    C = gcot.fit_gcot(x_patches_2d, eps2, C, k)
     acc, _, y_best = gcot.call_acc(C, y, rho)
     print('%10s %10s %10s' % ('OA', 'Kappa','NMI'))
     print('%10.4f %10.4f %10.4f' % (acc[0], acc[2], acc[1]))
