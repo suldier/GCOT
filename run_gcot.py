@@ -66,7 +66,6 @@ if __name__ == '__main__':
     img = minmax_scale(pca.fit_transform(img.reshape(n_row * n_column, n_band))).reshape(n_row, n_column, nb_comps)
     x_patches, y_ = p.get_HSI_patches_rw(img, gt, (PATCH_SIZE, PATCH_SIZE))
 
-    print(np.unique(y_))
     print('reduced img shape: ', img.shape)
     print('x_patch tensor shape: ', x_patches.shape)
     n_samples, n_width, n_height, n_band = x_patches.shape

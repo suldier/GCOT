@@ -29,7 +29,6 @@ class GCOT:
         normlized_A = np.dot(np.dot(D, A), D)
         return  normlized_A
 
-
     def fit_base(self, X, eps):
         n = X.shape[0]
         a, b = np.ones((n,)) / n, np.ones((n,)) / n
@@ -89,6 +88,7 @@ class GCOT:
         spectral.fit(L)
         grp = spectral.fit_predict(L)
         return grp, L
+
     def cluster_accuracy(self, y_true, y_pre):
         Label1 = np.unique(y_true)
         nClass1 = len(Label1)
@@ -120,6 +120,7 @@ class GCOT:
         print(y_true.shape, y_best.shape)
         ca = self.class_acc(y_true, y_best)
         return (acc, nmi, kappa, ca), y_best
+
     def class_acc(self, y_true, y_pre):
         """
         calculate each class's acc
