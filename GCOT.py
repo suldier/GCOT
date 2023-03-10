@@ -87,7 +87,7 @@ class GCOT:
         spectral = SpectralClustering(n_clusters=K, eigen_solver='arpack', affinity='precomputed',
                                       assign_labels='discretize')
         spectral.fit(L)
-        grp = spectral.fit_predict(L) + 1
+        grp = spectral.fit_predict(L)
         return grp, L
     def cluster_accuracy(self, y_true, y_pre):
         Label1 = np.unique(y_true)
@@ -117,9 +117,9 @@ class GCOT:
         acc = 1. - missrate
         nmi = normalized_mutual_info_score(y_true, y_pre)
         kappa = cohen_kappa_score(y_true, y_best)
+        print(y_true.shape, y_best.shape)
         ca = self.class_acc(y_true, y_best)
-        return acc, nmi, kappa, ca
-
+        return (acc, nmi, kappa, ca), y_best
     def class_acc(self, y_true, y_pre):
         """
         calculate each class's acc
@@ -139,6 +139,5 @@ class GCOT:
     def call_acc(self, C, y, ro):
         C = self.thrC(C, ro)
         y_pre, C_final = self.post_proC(C, self.n_clusters, 8, 18)
-
-        acc = self.cluster_accuracy(y, y_pre)
-        return acc
+        acc, y_best = self.cluster_accuracy(y, y_pre)
+        return acc, y_pre, y_best

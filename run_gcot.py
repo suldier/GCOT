@@ -35,8 +35,8 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     root = 'HSI_Datasets/'
 
-    im_, gt_ = 'Indian_pines_corrected', 'Indian_pines_gt'
-    #im_, gt_ = 'SalinasA_corrected', 'SalinasA_gt'
+    #im_, gt_ = 'Indian_pines_corrected', 'Indian_pines_gt'
+    im_, gt_ = 'SalinasA_corrected', 'SalinasA_gt'
     #im_, gt_ = 'PaviaU', 'PaviaU_gt'
 
     img_path = root + im_ + '.mat'
@@ -75,7 +75,6 @@ if __name__ == '__main__':
 
     # reorder samples according to gt
     x_patches_2d, y, index = order_sam_for_diag(x_patches_2d, y)
-
     # normalize data
     x_patches_2d = normalize(x_patches_2d)
     print('final sample shape: %s, labels: %s' % (x_patches_2d.shape, np.unique(y)))
@@ -84,12 +83,15 @@ if __name__ == '__main__':
     # ========================
     # performing  GCOT
     # ========================
-
     gcot = GCOT(n_clusters=N_CLASSES)
 
+    # ========================
+    # Results and Visualization
+    # ========================
     C = gcot.fit_base(x_patches_2d, eps1)
     C = gcot.fit_gcot(x_patches_2d, eps2, C, k)
-    acc = gcot.call_acc(C, y, rho)
+    acc, _, y_best = gcot.call_acc(C, y, rho)
     print('%10s %10s %10s' % ('OA', 'Kappa','NMI'))
     print('%10.4f %10.4f %10.4f' % (acc[0], acc[2], acc[1]))
-
+    y_best = np.array([lab_map[i] for i in y_best[index]])
+    p.show_pre1(gt, np.arange(y.shape[0]), y_best, '%s_gcot.pdf' % im_)
